@@ -1,0 +1,42 @@
+### Get all songs
+
+GET http://localhost:3000/songs
+Accept: application/json
+
+### Get song by id
+# replace :id with an actual id, e.g. 1
+GET http://localhost:3000/songs/{{id}}
+Accept: application/json
+
+### Update song by id (PUT)
+PUT http://localhost:3000/songs/{{id}}
+Content-Type: application/json
+
+{
+    "title": "Updated Song Title",
+    "artists": ["Updated Artist"],
+    "duration": 210,
+    "releaseDate": "2024-01-01T00:00:00.000Z"
+}
+
+### Partial update song by id (PATCH)
+PATCH http://localhost:3000/songs/{{id}}
+Content-Type: application/json
+
+{
+    "title": "Partially Updated Title"
+}
+
+### Delete song by id
+DELETE http://localhost:3000/songs/{{id}}
+
+### Create song (POST)
+POST http://localhost:3000/songs
+Content-Type: application/json
+
+{
+    "title": "New Song Title",
+    "artists": ["New Artist"],
+    "duration": "02:34",
+    "releaseDate": "2025-12-02T12:00:00.000Z"
+}
