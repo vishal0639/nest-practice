@@ -3,6 +3,10 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
   Patch,
   Post,
   Put,
@@ -20,12 +24,24 @@ export class SongsController {
 
   @Get()
   findAll() {
-    return this.songsService.findAll();
+    try {
+      return this.songsService.findAll();
+    } catch (e) {
+      throw new HttpException('Failed to fetch songs', HttpStatus.FORBIDDEN, {
+        cause: e,
+      });
+    }
   }
 
   @Get(':id')
-  findOne() {
-    return 'song is based on id';
+  findOne(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: string,
+  ) {
+    return `song is based on id ${typeof id}`;
   }
 
   @Put(':id')

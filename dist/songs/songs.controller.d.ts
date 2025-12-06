@@ -5,7 +5,7 @@ export declare class SongsController {
     constructor(songsService: SongsService);
     create(CreateSongDto: CreateSongDto): CreateSongDto[];
     findAll(): CreateSongDto[];
-    findOne(): string;
+    findOne(id: string): string;
     update(): string;
     delete(): string;
     modify(): string;

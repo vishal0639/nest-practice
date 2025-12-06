@@ -25,10 +25,17 @@ let SongsController = class SongsController {
         return this.songsService.create(CreateSongDto);
     }
     findAll() {
-        return this.songsService.findAll();
+        try {
+            return this.songsService.findAll();
+        }
+        catch (e) {
+            throw new common_1.HttpException('Failed to fetch songs', common_1.HttpStatus.FORBIDDEN, {
+                cause: e,
+            });
+        }
     }
-    findOne() {
-        return 'song is based on id';
+    findOne(id) {
+        return `song is based on id ${typeof id}`;
     }
     update() {
         return 'update song by id';
@@ -56,8 +63,9 @@ __decorate([
 ], SongsController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id', new common_1.ParseIntPipe({ errorHttpStatusCode: common_1.HttpStatus.NOT_ACCEPTABLE }))),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], SongsController.prototype, "findOne", null);
 __decorate([
